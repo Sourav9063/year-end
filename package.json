@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "fix": "biome check --write .",
+    "fix:unsafe": "biome check --write --unsafe ."
   },
   "dependencies": {
     "html-to-image": "^1.11.13",

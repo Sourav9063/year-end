@@ -1,101 +1,109 @@
 "use client";
 
 import Image from "next/image";
-import yearEndMImage from "../assets/year-end-m.png";
+import { useState } from "react";
 import yearEndMImage5x from "../assets/year-end-m5x.png";
-import { toBlob } from "html-to-image";
-import { useCallback, useRef, useState } from "react";
+import { handleShare } from "../utils/share";
+
+export const cardOverlayConfig = {
+  food: {
+    // Large "200"
+    position: { top: "37%", left: "17%" },
+    className:
+      "text-[#E83330] text-[clamp(1rem,6vw,2.5rem)] font-black tracking-tighter",
+  },
+  parcel: {
+    // "100" inside Parcel box
+    position: { top: "30%", left: "54%" },
+    className:
+      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+  },
+  bike: {
+    // "115" inside Bike box
+    position: { top: "64%", left: "17%" },
+    className:
+      "text-[#E83330] text-[clamp(1rem,6vw,2.5rem)] font-black tracking-tighter",
+  },
+  courier: {
+    // "100" inside Courier box
+    position: { top: "48%", left: "54%" },
+    className:
+      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+  },
+  car: {
+    // "41" inside Car box
+    position: { top: "65.5%", left: "54%" },
+    className:
+      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+  },
+  points: {
+    // "6980" inside the Platinum card (rotated)
+    position: { top: "83%", left: "28%" },
+    className:
+      "text-gray-900 text-[clamp(1rem,5vw,2rem)]  transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-9 origin-center",
+  },
+  saved: {
+    // "৳5,000" inside the Promo card (rotated)
+    position: { top: "88.5%", left: "73%" },
+    className:
+      "text-gray-900 text-[clamp(1rem,5vw,2rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-3 origin-center",
+  },
+  user: {
+    position: { top: "91.5%", left: "33%" },
+    className:
+      "text-gray-900 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
+  },
+};
 
 export default function Home() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<string>("");
-
-  const fallbackDownload = (blob: Blob) => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "pathao_card.png";
-    a.click();
-    URL.revokeObjectURL(url);
+  const statsData = {
+    food: 200,
+    parcel: 100,
+    bike: 115,
+    courier: 100,
+    car: 4100,
+    points: 698000,
+    saved: "৳5,000",
+    user: "You're a platinum user!",
   };
-
-  const handleShare = useCallback(async () => {
-    if (!ref.current) return;
-
-    setStatus("Generating image...");
-
-    try {
-      // 1. Ensure fonts and images are ready before capturing
-      await document.fonts.ready; 
-
-      // 2. Use specific configuration options to fix the "empty" issue
-      const blob = await toBlob(ref.current, {
-        cacheBust: true,
-        // CRITICAL: Forces standard resolution. 
-        // Without this, mobile phones create massive canvases that crash/render blank.
-        pixelRatio: 2, 
-        // CRITICAL: Ensures the background isn't transparent
-        backgroundColor: "#fffff", // Match your bg-orange-500 hex code
-        // Helps with some Next.js layout shifts during capture
-        style: {
-           margin: '0',
-        },
-      });
-
-      if (!blob) throw new Error("Blob generation failed");
-
-      const file = new File([blob], "pathao_card.png", { type: "image/png" });
-
-      if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-      ) {
-        try {
-          await navigator.share({
-            title: "Pathao Card",
-            text: "Check out my year end summary!",
-            files: [file],
-          });
-          setStatus("Shared successfully!");
-        } catch (error) {
-          if ((error as Error).name !== "AbortError") {
-            console.error(error);
-            setStatus("Share failed. Downloading.");
-            fallbackDownload(blob);
-          } else {
-            setStatus("Share cancelled.");
-          }
-        }
-      } else {
-        setStatus("Web Share API not supported. Downloading.");
-        fallbackDownload(blob);
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("Error: " + (err as Error).message);
-    }
-  }, []);
+  const [status, setStatus] = useState<string>("");
 
   return (
     // ... your JSX remains the same
     <div className="flex flex-col items-center gap-4 p-4 px-2 min-h-screen">
-      <div id="output" ref={ref} className="mx-auto w-fit max-w-150">
-        <Image
-          src={yearEndMImage5x}
-          alt="background"
-          priority
-        />
+      <div id="output" className="mx-auto w-fit max-w-150 min-w-70 relative">
+        <Image src={yearEndMImage5x} alt="background" priority />
+        {Object.entries(cardOverlayConfig).map(([key, config]) => (
+          <div
+            key={key}
+            className={`absolute ${config.className}`}
+            style={{
+              top: config.position.top,
+              left: config.position.left,
+            }}
+          >
+            {statsData[key as keyof typeof statsData]}
+          </div>
+        ))}
       </div>
-      
+
       <button
         id="share-btn"
-        onClick={handleShare}
+        onClick={() => handleShare("output", setStatus)}
         className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
       >
         Share
       </button>
-      {/* ... status ... */}
+      {status && (
+        <div
+          id="status"
+          className={`text-sm ${
+            status.includes("Error") ? "text-red-500" : "text-gray-600"
+          }`}
+        >
+          {status}
+        </div>
+      )}
     </div>
   );
 }
