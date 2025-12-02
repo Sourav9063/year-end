@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import yearEndMImage5x from "../assets/year-end-m5x.png";
 import { handleShare } from "../utils/share";
+import { getRandomNumber } from "../utils/random";
 
 export const cardOverlayConfig = {
   food: {
@@ -51,12 +52,12 @@ export const cardOverlayConfig = {
   user: {
     position: { top: "91.5%", left: "33%" },
     className:
-      "text-gray-900 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
+      "text-gray-900 px-4 py-2 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
   },
 };
 
 export default function Home() {
-  const statsData = {
+  const [statsData, setStatsData] = useState({
     food: 200,
     parcel: 100,
     bike: 115,
@@ -65,8 +66,21 @@ export default function Home() {
     points: 698000,
     saved: "৳5,000",
     user: "You're a platinum user!",
-  };
+  });
   const [status, setStatus] = useState<string>("");
+
+  const handleRandomize = () => {
+    setStatsData({
+      food: getRandomNumber(0, 99999),
+      parcel: getRandomNumber(0, 99999),
+      bike: getRandomNumber(0, 99999),
+      courier: getRandomNumber(0, 99999),
+      car: getRandomNumber(0, 99999),
+      points: getRandomNumber(0, 999999),
+      saved: `৳${getRandomNumber(0, 999999).toLocaleString()}`,
+      user: getRandomNumber(1,3) === 1 ? "You're a platinum user!": "You're a gold user",
+    });
+  };
 
   return (
     // ... your JSX remains the same
@@ -87,13 +101,22 @@ export default function Home() {
         ))}
       </div>
 
-      <button
-        id="share-btn"
-        onClick={() => handleShare("output", setStatus)}
-        className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
-      >
-        Share
-      </button>
+      <div className="flex gap-4">
+        <button
+          id="randomize-btn"
+          onClick={handleRandomize}
+          className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition-colors"
+        >
+          Randomize
+        </button>
+        <button
+          id="share-btn"
+          onClick={() => handleShare("output", setStatus)}
+          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
+        >
+          Share
+        </button>
+      </div>
       {status && (
         <div
           id="status"
