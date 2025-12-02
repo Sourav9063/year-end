@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import yearEndMImage5x from "../assets/year-end-m5x.png";
-import { handleShare } from "../utils/share";
 import { getRandomNumber } from "../utils/random";
+import { handleShare } from "../utils/share";
 
 export const cardOverlayConfig = {
   food: {
@@ -78,7 +78,10 @@ export default function Home() {
       car: getRandomNumber(0, 99999),
       points: getRandomNumber(0, 999999),
       saved: `৳${getRandomNumber(0, 999999).toLocaleString()}`,
-      user: getRandomNumber(1,3) === 1 ? "You're a platinum user!": "You're a gold user",
+      user:
+        getRandomNumber(1, 3) === 1
+          ? "You're a platinum user!"
+          : "You're a gold user",
     });
   };
 
