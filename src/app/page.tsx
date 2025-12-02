@@ -52,7 +52,7 @@ export const cardOverlayConfig = {
   user: {
     position: { top: "91.5%", left: "33%" },
     className:
-      "text-gray-900 px-4 py-2 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
+      "text-gray-900 px-4 py-1 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
   },
 };
 
