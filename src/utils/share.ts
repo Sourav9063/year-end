@@ -16,6 +16,11 @@ export const handleShare = async (
   const element = document.getElementById(id);
   if (!element) return;
 
+  element.style.borderRadius = "24px";
+  element.style.overflow = "hidden";
+  element.style.border = "1px solid var(--BW-Separator, #EBEEF0);";
+  element.style.minHeight = "auto";
+
   setStatus("Generating image...");
 
   try {
@@ -68,5 +73,9 @@ export const handleShare = async (
   } catch (err) {
     console.error(err);
     setStatus(`Error: ${(err as Error).message}`);
+  } finally {
+    element.style.borderRadius = "0px";
+    element.style.border = "1px solid var(--BW-Separator, #EBEEF0);";
+    element.style.minHeight = "100vh";
   }
 };

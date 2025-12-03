@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import yearEndMImage5x from "../assets/year-end-m5x.png";
+import yearEnd10x from "../assets/year-end-10xn.png";
+import gradientBottom from "../assets/gradient-bottom.svg";
 import { getRandomNumber } from "../utils/random";
 import { handleShare } from "../utils/share";
 
@@ -87,49 +88,63 @@ export default function Home() {
 
   return (
     // ... your JSX remains the same
-    <div className="flex flex-col items-center gap-4 p-4 px-2 min-h-screen">
-      <div id="output" className="mx-auto w-fit max-w-150 min-w-70 relative">
-        <Image src={yearEndMImage5x} alt="background" priority />
-        {Object.entries(cardOverlayConfig).map(([key, config]) => (
-          <div
-            key={key}
-            className={`absolute ${config.className}`}
-            style={{
-              top: config.position.top,
-              left: config.position.left,
-            }}
-          >
-            {statsData[key as keyof typeof statsData]}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex gap-4">
-        <button
-          id="randomize-btn"
-          onClick={handleRandomize}
-          className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition-colors"
-        >
-          Randomize
-        </button>
-        <button
-          id="share-btn"
-          onClick={() => handleShare("output", setStatus)}
-          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors"
-        >
-          Share
-        </button>
-      </div>
-      {status && (
+    <div className="flex flex-col items-center min-h-screen h-screen">
+      <div className="mx-auto w-fit max-w-150 min-w-70 min-h-screen relative">
         <div
-          id="status"
-          className={`text-sm ${
-            status.includes("Error") ? "text-red-500" : "text-gray-600"
-          }`}
+          id="output"
+          className="mx-auto w-fit max-w-150 min-w-70 min-h-screen overflow-hidden relative overflow-x-hidden"
         >
-          {status}
+          <Image src={yearEnd10x} alt="background" priority />
+          {/* {Object.entries(cardOverlayConfig).map(([key, config]) => (
+            <div
+              key={key}
+              className={`absolute ${config.className}`}
+              style={{
+                top: config.position.top,
+                left: config.position.left,
+              }}
+            >
+              {statsData[key as keyof typeof statsData]}
+            </div>
+          ))} */}
+          <Image
+            src={gradientBottom}
+            alt="background"
+            priority
+            className="absolute top-[80%] -left-40 rotate-45"
+          />
         </div>
-      )}
+      </div>
+      <div className="flex gap-4 h-16 w-screen max-w-150 min-w-70 fixed bottom-0 justify-center items-center bg-transparent">
+        <div className="bg-transparent w-full px-4">
+          {/* <button
+                type="button"
+                id="randomize-btn"
+                onClick={handleRandomize}
+                className="px-6 py-3 rounded-full bg-green-600 text-white font-semibold shadow hover:bg-green-700 transition-colors"
+              >
+                Randomize
+              </button> */}
+          <button
+            type="button"
+            id="share-btn"
+            onClick={() => handleShare("output", setStatus)}
+            className="px-6 py-2 min-w-full w-full rounded-full bg-red-600 text-white font-semibold shadow hover:bg-blue-700 transition-colors"
+          >
+            Share
+          </button>
+          {status && (
+            <div
+              id="status"
+              className={`text-sm ${
+                status.includes("Error") ? "text-red-500" : "text-gray-600"
+              }`}
+            >
+              {status}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
