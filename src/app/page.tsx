@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import yearEnd10x from "../assets/year-end-10xn.png";
 import gradientBottom from "../assets/gradient-bottom.svg";
+import yearEnd10x from "../assets/year-end-10xn.png";
 import { getRandomNumber } from "../utils/random";
 import { handleShare } from "../utils/share";
 
@@ -58,7 +58,7 @@ export const cardOverlayConfig = {
 };
 
 export default function Home() {
-  const [statsData, setStatsData] = useState({
+  const [_statsData, setStatsData] = useState({
     food: 200,
     parcel: 100,
     bike: 115,
@@ -70,7 +70,7 @@ export default function Home() {
   });
   const [status, setStatus] = useState<string>("");
 
-  const handleRandomize = () => {
+  const _handleRandomize = () => {
     setStatsData({
       food: getRandomNumber(0, 99999),
       parcel: getRandomNumber(0, 99999),
