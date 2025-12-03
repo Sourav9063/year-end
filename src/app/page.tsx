@@ -2,52 +2,51 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import gradientBottom from "../assets/gradient-bottom.svg";
-import yearEnd10x from "../assets/year-end-f.png";
+import gradientBottom from "../assets/year-end-fb.png";
+import yearEnd10x from "../assets/year-end-fs.png";
 import { getRandomNumber } from "../utils/random";
 import { handleShare } from "../utils/share";
 
 export const cardOverlayConfig = {
   food: {
-    // Anchored Left, smaller min-font
-    position: { top: "31%", left: "17%" },
+    position: { top: "39.25%", left: "17%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   bike: {
-    position: { top: "31%", left: "56%" },
+    position: { top: "39.25%", left: "56%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   car: {
-    position: { top: "41.5%", left: "17%" },
+    position: { top: "52.75%", left: "17%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   parcel: {
-    position: { top: "41.5%", left: "56%" },
+    position: { top: "52.75%", left: "56%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   courier: {
-    position: { top: "52%", left: "17%" },
+    position: { top: "66.15%", left: "17%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   cng: {
-    position: { top: "52%", left: "56%" },
+    position: { top: "66.15%", left: "56%" },
     className:
       "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   points: {
     // Bottom Left Card - Kept Centered but adjusted size
-    position: { top: "67%", left: "31%" },
+    position: { top: "85.75%", left: "31%" },
     className:
       "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-[9deg] origin-center whitespace-nowrap",
   },
   saved: {
     // Bottom Right Card - Kept Centered but adjusted size
-    position: { top: "69.5%", left: "69.5%" },
+    position: { top: "88.5%", left: "69.5%" },
     className:
       "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-[5deg] origin-center whitespace-nowrap",
   },
@@ -92,8 +91,8 @@ export default function Home() {
 
   return (
     // ... your JSX remains the same
-    <div className="flex flex-col items-center min-h-screen h-screen">
-      <div className="mx-auto w-fit max-w-150 min-w-70 min-h-screen relative">
+    <div className="min-h-screen h-screen">
+      <div className="mx-auto w-fit max-w-150 min-w-70 relative">
         <div
           id="output"
           className="mx-auto w-fit max-w-150 min-w-70  overflow-hidden relative"
@@ -113,7 +112,10 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div className="flex gap-4 h-16 w-screen max-w-150 min-w-70 fixed bottom-0 justify-center items-center bg-transparent">
+      <div className="mx-auto w-fit max-w-150 min-w-70 relative h-20 overflow-hidden">
+        <Image src={gradientBottom} alt="background" priority />
+      </div>
+      <div className="mx-auto flex gap-4 h-16 w-screen max-w-150 min-w-70 fixed bottom-0 left-0 right-0 justify-center items-center bg-transparent">
         <div className="bg-transparent w-full px-4">
           <button
             type="button"
