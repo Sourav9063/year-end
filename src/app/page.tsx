@@ -3,58 +3,60 @@
 import Image from "next/image";
 import { useState } from "react";
 import gradientBottom from "../assets/gradient-bottom.svg";
-import yearEnd10x from "../assets/year-end-10xn.png";
+import yearEnd10x from "../assets/year-end-f.png";
 import { getRandomNumber } from "../utils/random";
 import { handleShare } from "../utils/share";
 
 export const cardOverlayConfig = {
   food: {
-    // Large "200"
-    position: { top: "37%", left: "17%" },
+    // Anchored Left, smaller min-font
+    position: { top: "31%", left: "17%" },
     className:
-      "text-[#E83330] text-[clamp(1rem,6vw,2.5rem)] font-black tracking-tighter",
-  },
-  parcel: {
-    // "100" inside Parcel box
-    position: { top: "30%", left: "54%" },
-    className:
-      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   bike: {
-    // "115" inside Bike box
-    position: { top: "64%", left: "17%" },
+    position: { top: "31%", left: "56%" },
     className:
-      "text-[#E83330] text-[clamp(1rem,6vw,2.5rem)] font-black tracking-tighter",
-  },
-  courier: {
-    // "100" inside Courier box
-    position: { top: "48%", left: "54%" },
-    className:
-      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   car: {
-    // "41" inside Car box
-    position: { top: "65.5%", left: "54%" },
+    position: { top: "41.5%", left: "17%" },
     className:
-      "text-[#E83330] text-[clamp(1rem,5vw,2rem)] font-black tracking-tighter",
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+  },
+  parcel: {
+    position: { top: "41.5%", left: "56%" },
+    className:
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+  },
+  courier: {
+    position: { top: "52%", left: "17%" },
+    className:
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+  },
+  cng: {
+    position: { top: "52%", left: "56%" },
+    className:
+      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
   },
   points: {
-    // "6980" inside the Platinum card (rotated)
-    position: { top: "83%", left: "28%" },
+    // Bottom Left Card - Kept Centered but adjusted size
+    position: { top: "67%", left: "31%" },
     className:
-      "text-gray-900 text-[clamp(1rem,5vw,2rem)]  transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-9 origin-center",
+      "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-[9deg] origin-center whitespace-nowrap",
   },
   saved: {
-    // "৳5,000" inside the Promo card (rotated)
-    position: { top: "88.5%", left: "73%" },
+    // Bottom Right Card - Kept Centered but adjusted size
+    position: { top: "69.5%", left: "69.5%" },
     className:
-      "text-gray-900 text-[clamp(1rem,5vw,2rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-3 origin-center",
+      "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-[5deg] origin-center whitespace-nowrap",
   },
-  user: {
-    position: { top: "91.5%", left: "33%" },
-    className:
-      "text-gray-900 px-4 py-1 text-[clamp(0.32rem,1.8vw,0.8rem)] bg-white transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-6 origin-center",
-  },
+  // user: {
+  //   // Centered pill at bottom
+  //   position: { top: "93%", left: "50%" },
+  //   className:
+  //     "text-gray-900 px-3 py-1 text-[clamp(0.5rem,2vw,1rem)] bg-white/90 rounded-full backdrop-blur-sm shadow-sm transform -translate-x-1/2 -translate-y-1/2 font-semibold origin-center whitespace-nowrap",
+  // },
 };
 
 export default function Home() {
@@ -64,9 +66,10 @@ export default function Home() {
     bike: 115,
     courier: 100,
     car: 4100,
+    cng: 100,
     points: 698000,
     saved: "৳5,000",
-    user: "You're a platinum user!",
+    // user: "You're a platinum user!",
   });
   const [status, setStatus] = useState<string>("");
 
@@ -77,12 +80,13 @@ export default function Home() {
       bike: getRandomNumber(0, 99999),
       courier: getRandomNumber(0, 99999),
       car: getRandomNumber(0, 99999),
+      cng: getRandomNumber(0, 99999),
       points: getRandomNumber(0, 999999),
       saved: `৳${getRandomNumber(0, 999999).toLocaleString()}`,
-      user:
-        getRandomNumber(1, 3) === 1
-          ? "You're a platinum user!"
-          : "You're a gold user",
+      // user:
+      //   getRandomNumber(1, 3) === 1
+      //     ? "You're a platinum user!"
+      //     : "You're a gold user",
     });
   };
 
@@ -92,10 +96,10 @@ export default function Home() {
       <div className="mx-auto w-fit max-w-150 min-w-70 min-h-screen relative">
         <div
           id="output"
-          className="mx-auto w-fit max-w-150 min-w-70 min-h-screen overflow-hidden relative overflow-x-hidden"
+          className="mx-auto w-fit max-w-150 min-w-70  overflow-hidden relative"
         >
           <Image src={yearEnd10x} alt="background" priority />
-          {/* {Object.entries(cardOverlayConfig).map(([key, config]) => (
+          {Object.entries(cardOverlayConfig).map(([key, config]) => (
             <div
               key={key}
               className={`absolute ${config.className}`}
@@ -104,27 +108,21 @@ export default function Home() {
                 left: config.position.left,
               }}
             >
-              {statsData[key as keyof typeof statsData]}
+              {_statsData[key as keyof typeof _statsData]}
             </div>
-          ))} */}
-          <Image
-            src={gradientBottom}
-            alt="background"
-            priority
-            className="absolute top-[80%] -left-40 rotate-45"
-          />
+          ))}
         </div>
       </div>
       <div className="flex gap-4 h-16 w-screen max-w-150 min-w-70 fixed bottom-0 justify-center items-center bg-transparent">
         <div className="bg-transparent w-full px-4">
-          {/* <button
-                type="button"
-                id="randomize-btn"
-                onClick={handleRandomize}
-                className="px-6 py-3 rounded-full bg-green-600 text-white font-semibold shadow hover:bg-green-700 transition-colors"
-              >
-                Randomize
-              </button> */}
+          <button
+            type="button"
+            id="randomize-btn"
+            onClick={_handleRandomize}
+            className="px-6 fixed top-2 right-2 opacity-15 py-3 rounded-full bg-green-600 text-white font-semibold shadow hover:bg-green-700 transition-colors"
+          >
+            Randomize
+          </button>
           <button
             type="button"
             id="share-btn"

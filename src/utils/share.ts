@@ -18,8 +18,8 @@ export const handleShare = async (
 
   element.style.borderRadius = "24px";
   element.style.overflow = "hidden";
-  element.style.border = "1px solid var(--BW-Separator, #EBEEF0);";
-  element.style.minHeight = "auto";
+  element.style.border = "1px solid #EBEEF0;";
+  element.style.height = "min(calc(100vw * 1.815), calc(1.815 * 600px))";
 
   setStatus("Generating image...");
 
@@ -77,5 +77,6 @@ export const handleShare = async (
     element.style.borderRadius = "0px";
     element.style.border = "1px solid var(--BW-Separator, #EBEEF0);";
     element.style.minHeight = "100vh";
+    element.style.height = "auto";
   }
 };
