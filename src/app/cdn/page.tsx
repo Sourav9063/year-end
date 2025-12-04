@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { getRandomNumber } from "@/utils/random";
 import { handleShare } from "@/utils/share";
-import gradientBottom from "../assets/year-end-fb.png";
+import gradientBottom from "../../assets/year-end-fb.png";
 
 export const cardOverlayConfig = {
   food: {
