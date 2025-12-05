@@ -1,6 +1,6 @@
 import { toBlob } from "html-to-image";
 
-const fallbackDownload = (blob: Blob) => {
+const fallbackDownload = (blob) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -9,10 +9,7 @@ const fallbackDownload = (blob: Blob) => {
   URL.revokeObjectURL(url);
 };
 
-export const handleShare = async (
-  id: string,
-  setStatus: (status: string) => void,
-) => {
+export const handleShare = async (id, setStatus) => {
   const element = document.getElementById(id);
   if (!element) return;
 
@@ -58,7 +55,7 @@ export const handleShare = async (
         });
         setStatus("Shared successfully!");
       } catch (error) {
-        if ((error as Error).name !== "AbortError") {
+        if (error.name !== "AbortError") {
           console.error(error);
           setStatus("Share failed. Downloading.");
           fallbackDownload(blob);
@@ -72,7 +69,7 @@ export const handleShare = async (
     }
   } catch (err) {
     console.error(err);
-    setStatus(`Error: ${(err as Error).message}`);
+    setStatus(`Error: ${err.message}`);
   } finally {
     element.style.borderRadius = "0px";
     element.style.border = "1px solid var(--BW-Separator, #EBEEF0);";

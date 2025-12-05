@@ -1,0 +1,15 @@
+appName: driver-onboarding
+
+deployments:
+  - driver-onboarding-deployment
+
+namespaces:
+  - driver-onboarding
+
+deploy:
+  replicas: 1
+  image:
+    repo: harbor.pathaointernal.com/frontend/driver-onboarding
+    tag: "1.0"
+
+imgPullSecret:

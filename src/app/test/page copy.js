@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { getRandomNumber } from "@/utils/random";
-import { handleShare } from "@/utils/share";
-import gradientBottom from "../../assets/year-end-fb.png";
+import gradientBottom from "@/assets/year-end-fb.png";
+import yearEnd10x from "@/assets/year-end-fs.png";
+import { getRandomNumber } from "../utils/random";
+import { handleShare } from "../utils/share";
 
 export const cardOverlayConfig = {
   food: {
@@ -69,7 +70,7 @@ export default function Home() {
     saved: "৳5,000",
     // user: "You're a platinum user!",
   });
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState < string > "";
 
   const _handleRandomize = () => {
     setStatsData({
@@ -96,13 +97,7 @@ export default function Home() {
           id="output"
           className="mx-auto w-fit max-w-150 min-w-70  overflow-hidden relative"
         >
-          <Image
-            src="https://cdn.pathao.com/uploads/loop/campaign/1637/1764831860427/Frame%202147238820%20(1).png"
-            alt="background"
-            width="1000"
-            height="2000"
-            priority
-          />
+          <Image src={yearEnd10x} alt="background" priority />
           {Object.entries(cardOverlayConfig).map(([key, config]) => (
             <div
               key={key}
@@ -112,7 +107,7 @@ export default function Home() {
                 left: config.position.left,
               }}
             >
-              {_statsData[key as keyof typeof _statsData]}
+              {_statsData[key]}
             </div>
           ))}
         </div>

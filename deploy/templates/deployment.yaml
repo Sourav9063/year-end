@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{.Values.appName}}
+  name: {{.Values.appName}}
+  annotations:
+    service.pathao.com/owner: {{ .Values.author.name }}
+    service.pathao.com/team: {{ .Values.author.team }}
+spec:
+  replicas: {{ default 1 .Values.deploy.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.appName}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.appName}}
+    spec:
+      containers:
+      - image: {{.Values.deploy.image.repo}}:{{.Values.deploy.image.tag}}
+        imagePullPolicy: Always
+        name: {{.Values.appName}}
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+      imagePullSecrets:
+      - name: regsecret-{{.Values.appName}}

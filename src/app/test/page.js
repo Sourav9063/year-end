@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import gradientBottom from "../assets/year-end-fb.png";
-import yearEnd10x from "../assets/year-end-fs.png";
-import { getRandomNumber } from "../utils/random";
-import { handleShare } from "../utils/share";
+import { Toaster } from "react-hot-toast";
+import gradientBottom from "@/assets/year-end-fb.png";
+import yearEnd10x from "@/assets/year-end-fs.png";
+import { getRandomNumber } from "@/utils/random";
+import { handleShare } from "@/utils/share";
 
 export const cardOverlayConfig = {
   food: {
@@ -70,7 +71,6 @@ export default function Home() {
     saved: "৳5,000",
     // user: "You're a platinum user!",
   });
-  const [status, setStatus] = useState<string>("");
 
   const _handleRandomize = () => {
     setStatsData({
@@ -90,8 +90,8 @@ export default function Home() {
   };
 
   return (
-    // ... your JSX remains the same
     <div className="min-h-screen h-screen">
+      <Toaster />
       <div className="mx-auto w-fit max-w-150 min-w-70 relative">
         <div
           id="output"
@@ -107,7 +107,7 @@ export default function Home() {
                 left: config.position.left,
               }}
             >
-              {_statsData[key as keyof typeof _statsData]}
+              {_statsData[key]}
             </div>
           ))}
         </div>
@@ -128,21 +128,11 @@ export default function Home() {
           <button
             type="button"
             id="share-btn"
-            onClick={() => handleShare("output", setStatus)}
+            onClick={() => handleShare("output")}
             className="px-6 py-2 min-w-full w-full rounded-full bg-red-600 text-white font-semibold shadow hover:bg-blue-700 transition-colors"
           >
             Share
           </button>
-          {status && (
-            <div
-              id="status"
-              className={`text-sm ${
-                status.includes("Error") ? "text-red-500" : "text-gray-600"
-              }`}
-            >
-              {status}
-            </div>
-          )}
         </div>
       </div>
     </div>
