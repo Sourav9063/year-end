@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import cardContent from "@/assets/Card2.png";
-import bgImage from "@/assets/Card2BGF.png";
+import bgImage from "@/assets/Card2BGF3x.png";
 
 // As no specific overlay config was provided for the second card,
 // this will be an empty object for now.

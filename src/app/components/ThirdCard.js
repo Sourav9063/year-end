@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import bgImage from "@/assets/Card2BGF.png";
+import bgImage from "@/assets/Card2BGF3x.png";
 import cardContent from "@/assets/Card3.png";
 
 // As no specific overlay config was provided for the second card,
