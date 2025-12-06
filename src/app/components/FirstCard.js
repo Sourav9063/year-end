@@ -1,51 +1,49 @@
 "use client";
 
 import Image from "next/image";
-import cardContent from "@/assets/Card1.png";
+import cardContent from "@/assets/Card1Content.png";
 import bgImage from "@/assets/Card1BG.png";
 
 export const cardOverlayConfig = {
   food: {
-    position: { top: "39.25%", left: "17%" },
+    position: { top: "33%", left: "11%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   bike: {
-    position: { top: "39.25%", left: "56%" },
+    position: { top: "33%", left: "56.75%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   car: {
-    position: { top: "52.75%", left: "17%" },
+    position: { top: "49%", left: "11%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   parcel: {
-    position: { top: "52.75%", left: "56%" },
+    position: { top: "49%", left: "56.75%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   courier: {
-    position: { top: "66.15%", left: "17%" },
+    position: { top: "64.5%", left: "11%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   cng: {
-    position: { top: "66.15%", left: "56%" },
+    position: { top: "64.5%", left: "56.75%" },
     className:
-      "text-[#E83330] text-[clamp(0.7rem,5vw,2rem)] font-black tracking-tighter leading-none",
+      "text-[#E83330] text-[clamp(0.9rem,6vw,2.5rem)] font-black tracking-tighter leading-none",
   },
   points: {
-    // Bottom Left Card - Kept Centered but adjusted size
-    position: { top: "85.75%", left: "31%" },
+    position: { top: "91%", left: "33.5%" },
     className:
-      "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-[9deg] origin-center whitespace-nowrap",
+      "text-gray-900 text-[clamp(1rem,5vw,2.2rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold -rotate-7 origin-center whitespace-nowrap",
   },
   saved: {
-    // Bottom Right Card - Kept Centered but adjusted size
-    position: { top: "88.5%", left: "69.5%" },
+    position: { top: "91%", left: "67.5%" },
     className:
-      "text-gray-900 text-[clamp(0.8rem,4vw,1.8rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-[5deg] origin-center whitespace-nowrap",
+      "text-gray-900 text-[clamp(1rem,5vw,2.2rem)] transform -translate-x-1/2 -translate-y-1/2 font-bold rotate-5 origin-center whitespace-nowrap",
   },
 };
 
@@ -58,7 +56,7 @@ export default function FirstCard({ statsData, id }) {
           className="mx-auto w-fit max-w-150 min-w-70 overflow-hidden relative"
         >
           <Image src={bgImage} alt="background" priority />
-          <div className="absolute inset-0 px-7 pt-8">
+          <div className="absolute top-7 left-8 right-8">
             <Image src={cardContent} alt="content" priority />
             {Object.entries(cardOverlayConfig).map(([key, config]) => (
               <div

@@ -2,11 +2,26 @@ import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 
 export const handleShare = async (id) => {
-  const element = document.getElementById(id);
-  if (!element) {
+  const mainElement = document.getElementById(id);
+  if (!mainElement) {
     toast.error("Element not found");
     return;
   }
+  //copy of the mainElement
+  const element = mainElement.cloneNode(true);
+  element.style.borderRadius = "32px";
+  element.style.border = "1px solid #EBEEF0;";
+  const currentWidth = mainElement.offsetWidth;
+  console.log(currentWidth);
+  element.style.width = `${currentWidth}px`;
+  element.style.height = `${currentWidth * 1.7295597484}px`;
+
+  element.style.overflow = "hidden";
+
+  // Append to body to ensure it is part of the DOM for html2canvas to capture
+  element.style.position = "absolute";
+  element.style.left = "-9999px";
+  document.body.appendChild(element);
 
   const loadingToast = toast.loading("Preparing image...");
 
@@ -51,5 +66,8 @@ export const handleShare = async (id) => {
   } catch (err) {
     console.error(err);
     toast.error("Error generating image", { id: loadingToast });
+  } finally {
+    //delete the element
+    element.remove();
   }
 };
