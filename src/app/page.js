@@ -13,6 +13,8 @@ import FirstCard from "./components/FirstCard";
 import SecondCard from "./components/SecondCard";
 import ThirdCard from "./components/ThirdCard";
 
+export const cardIds = ["first-card", "second-card", "third-card"];
+
 export default function Home() {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -48,8 +50,6 @@ export default function Home() {
     slidesToScroll: 1,
     beforeChange: (_current, next) => setCurrentSlide(next),
   };
-
-  const cardIds = ["first-card", "second-card", "third-card"];
 
   return (
     <div className="relative min-h-screen h-screen max-w-md mx-auto overflow-hidden">

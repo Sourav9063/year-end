@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import cardContent from "@/assets/Card1Content.png";
 import bgImage from "@/assets/Card1BG.png";
+import cardContent from "@/assets/Card1Content.png";
 
 export const cardOverlayConfig = {
   food: {

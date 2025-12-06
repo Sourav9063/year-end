@@ -1,5 +1,6 @@
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
+import { cardIds } from "@/app/page";
 
 export const handleShare = async (id) => {
   const mainElement = document.getElementById(id);
@@ -14,7 +15,9 @@ export const handleShare = async (id) => {
   const currentWidth = mainElement.offsetWidth;
   console.log(currentWidth);
   element.style.width = `${currentWidth}px`;
-  element.style.height = `${currentWidth * 1.7295597484}px`;
+  const heightMultiplier =
+    cardIds[1] === id || cardIds[2] === id ? 1.5 : 1.7295597484;
+  element.style.height = `${currentWidth * heightMultiplier}px`;
 
   element.style.overflow = "hidden";
 
